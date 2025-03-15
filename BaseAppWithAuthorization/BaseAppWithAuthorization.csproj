@@ -41,6 +41,10 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<PreBuildEvent>powershell -ExecutionPolicy Bypass -File $(ProjectDir)updatemsal.ps1</PreBuildEvent>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -60,13 +64,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="appsettings.json" />
+   <None Remove="appsettings.json" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="appsettings.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
+   <EmbeddedResource Include="appsettings.json">
+     <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+   </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -81,8 +85,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="ViewModels\" />
-	  <Folder Include="Views\" />
+   <Folder Include="ViewModels\" />
+   <Folder Include="Views\" />
 	</ItemGroup>
 
 </Project>
