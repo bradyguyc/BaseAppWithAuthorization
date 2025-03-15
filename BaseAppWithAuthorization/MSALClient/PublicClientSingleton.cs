@@ -9,6 +9,7 @@ using Microsoft.Identity.Client;
 using System.Reflection;
 using BaseAppWithAuthorization.MSALClient;
 using System.Runtime.CompilerServices;
+using System.Diagnostics;
 
 namespace BaseAppWithAuthorization.MSALClient
 {
@@ -52,17 +53,27 @@ namespace BaseAppWithAuthorization.MSALClient
         private PublicClientSingleton()
         {
             // Load config
-            var assembly = Assembly.GetExecutingAssembly();
-            using var stream = assembly.GetManifestResourceStream("SignInMaui.appsettings.json");
-            AppConfiguration = new ConfigurationBuilder()
-                .AddJsonStream(stream)
-                .Build();
+            try
+            {
+                var assembly = Assembly.GetExecutingAssembly();
+                using var stream = assembly.GetManifestResourceStream("BaseAppWithAuthorization.appsettings.json");
+                AppConfiguration = new ConfigurationBuilder()
+                    .AddJsonStream(stream)
+                    .Build();
 
-            AzureAdConfig azureADConfig = AppConfiguration.GetSection("AzureAd").Get<AzureAdConfig>();
-            this.MSALClientHelper = new MSALClientHelper(azureADConfig);
+                AzureAdConfig azureADConfig = AppConfiguration.GetSection("AzureAd").Get<AzureAdConfig>();
+                this.MSALClientHelper = new MSALClientHelper(azureADConfig);
 
-            DownStreamApiConfig downStreamApiConfig = AppConfiguration.GetSection("DownstreamApi").Get<DownStreamApiConfig>();
-            this.DownstreamApiHelper = new DownstreamApiHelper(downStreamApiConfig, this.MSALClientHelper);
+                DownStreamApiConfig downStreamApiConfig = AppConfiguration.GetSection("DownstreamApi").Get<DownStreamApiConfig>();
+                this.DownstreamApiHelper = new DownstreamApiHelper(downStreamApiConfig, this.MSALClientHelper);
+            }
+            catch (Exception ex)
+            {
+                // Log error
+                // _logger.Error(ex);
+                Debug.WriteLine(ex.Message);
+                throw;
+            }
         }
 
         /// <summary>
