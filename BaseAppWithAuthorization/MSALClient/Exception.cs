@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-namespace SignInMaui.MSALClient
+namespace BaseAppWithAuthorization.MSALClient
 {
     /// <summary>
     /// Static class for a few extension methods related to Exception throwing and handling

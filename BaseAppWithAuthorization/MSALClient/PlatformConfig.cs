@@ -6,8 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BaseAppWithAuthorization.MSALClient;
 
-namespace SignInMaui.MSALClient
+namespace BaseAppWithAuthorization.MSALClient
 {
     /// <summary>
     /// Platform specific configuration.

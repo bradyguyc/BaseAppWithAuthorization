@@ -5,12 +5,11 @@ using Microsoft.Identity.Client;
 using Microsoft.Identity.Client.Extensions.Msal;
 using Microsoft.IdentityModel.Abstractions;
 using System.Diagnostics;
-
 #if WINDOWS
-using Microsoft.Identity.Client.Desktop;
+//using Microsoft.Identity.Client.Desktop;
 #endif
 
-namespace SignInMaui.MSALClient
+namespace BaseAppWithAuthorization.MSALClient
 {
     /// <summary>
     /// Contains methods that initialize and use the MSAL SDK
@@ -90,7 +89,7 @@ namespace SignInMaui.MSALClient
             this.PublicClientApplication = this.PublicClientApplicationBuilder
                 .WithRedirectUri($"msal{PublicClientSingleton.Instance.MSALClientHelper.AzureAdConfig.ClientId}://auth")
 #if WINDOWS
-                .WithWindowsEmbeddedBrowserSupport()
+             //   .WithWindowsEmbeddedBrowserSupport()
 #endif
                 .Build();
 

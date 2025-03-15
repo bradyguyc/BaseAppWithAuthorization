@@ -1,4 +1,7 @@
-﻿namespace BaseAppWithAuthorization
+﻿using BaseAppWithAuthorization.MSALClient;
+using Microsoft.Identity.Client;
+
+namespace BaseAppWithAuthorization
 {
     public partial class MainPage : ContentPage
     {
@@ -7,6 +10,19 @@
         public MainPage()
         {
             InitializeComponent();
+
+            IAccount cachedUserAccount = PublicClientSingleton.Instance.MSALClientHelper.FetchSignedInUserFromCache().Result;
+            
+            _ = Dispatcher.DispatchAsync(async () =>
+            {
+            
+            if (cachedUserAccount == null)
+            {
+                await PublicClientSingleton.Instance.AcquireTokenSilentAsync();
+            }
+
+            });
+            
         }
 
         private void OnCounterClicked(object? sender, EventArgs e)

@@ -3,7 +3,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace SignInMaui.MSALClient
+namespace BaseAppWithAuthorization.MSALClient
 {
     /// <summary>
     /// Contains some handy methods to retrieve a windows handle
