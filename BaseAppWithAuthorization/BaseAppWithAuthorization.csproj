@@ -20,6 +20,14 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
+
+		<!-- Android Minimum and Target Versions -->
+		<AndroidMinSdkVersion>32</AndroidMinSdkVersion>
+		<!-- Minimum version -->
+		<AndroidTargetSdkVersion>34</AndroidTargetSdkVersion>
+		<!-- Target version -->
+
+
 		<!-- Display name -->
 		<ApplicationTitle>BaseAppWithAuthorization</ApplicationTitle>
 
@@ -40,17 +48,18 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
-
+	<!--
 	<PropertyGroup>
 		<PreBuildEvent>powershell -ExecutionPolicy Bypass -File $(ProjectDir)updatemsal.ps1</PreBuildEvent>
 	</PropertyGroup>
+	-->
 
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\azureresourceviewer.svg"  Color="#879d8f"/>
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
