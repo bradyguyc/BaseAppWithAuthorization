@@ -3,12 +3,12 @@
     x:Class="BaseAppWithAuthorization.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:BaseAppWithAuthorization"
+    xmlns:local="clr-namespace:BaseAppWithAuthorization.Views"
     Title="BaseAppWithAuthorization">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate local:MainView}"
         Route="MainPage" />
 
 </Shell>

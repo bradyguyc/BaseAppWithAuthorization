@@ -13,10 +13,7 @@ using Microsoft.Identity.Client;
 namespace BaseAppWithAuthorization
 {
     
-    [IntentFilter(new[] { Intent.ActionView },
-      Categories = new[] { Intent.CategoryBrowsable, Intent.CategoryDefault },
-      DataHost = "auth",
-      DataScheme = "msal5998ef82-5d29-43eb-8c29-3c3dfd3dfbfb")]
+
     [Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, LaunchMode = LaunchMode.SingleTop, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
     public class MainActivity : MauiAppCompatActivity
     {

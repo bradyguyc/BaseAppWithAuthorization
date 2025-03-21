@@ -22,7 +22,7 @@
 
 
 		<!-- Android Minimum and Target Versions -->
-		<AndroidMinSdkVersion>32</AndroidMinSdkVersion>
+		<AndroidMinSdkVersion>33</AndroidMinSdkVersion>
 		<!-- Minimum version -->
 		<AndroidTargetSdkVersion>34</AndroidTargetSdkVersion>
 		<!-- Target version -->
@@ -32,7 +32,7 @@
 		<ApplicationTitle>BaseAppWithAuthorization</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.baseappwithauthorization</ApplicationId>
+		<ApplicationId>com.logicloop18.baseappwithauthorization</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -48,18 +48,24 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
-	<!--
-	<PropertyGroup>
-		<PreBuildEvent>powershell -ExecutionPolicy Bypass -File $(ProjectDir)updatemsal.ps1</PreBuildEvent>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
+	  <CodesignKey>Apple Development: Created via API (AC9MHHXQ3B)</CodesignKey>
+	  <CodesignProvision>BaseAppWithAuthProfile</CodesignProvision>
+	  <ProvisioningType>manual</ProvisioningType>
 	</PropertyGroup>
-	-->
+	<Target Name="Update MSAL Client ID" BeforeTargets="BeforeBuild">
+		<Exec Command="powershell.exe  -NoProfile -NonInteractive -ExecutionPolicy Bypass -File $(ProjectDir)updatemsal.ps1" />
+	</Target>
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg">
+		  <Color>#879d8f</Color>
+		</MauiIcon>
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\azureresourceviewer.svg"  Color="#879d8f"/>
+		<MauiSplashScreen Include="Resources\Splash\azureresourceviewer.svg" Color="#879d8f" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -83,14 +89,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.0-preview.1.25080.5" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.0-preview.1.25080.5" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0-preview.1.25080.5" />
-		<PackageReference Include="Microsoft.Identity.Client" Version="4.69.1" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="11.1.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.0-preview.2.25163.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.0-preview.2.25163.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0-preview.2.25163.2" />
+		<PackageReference Include="Microsoft.Identity.Client" Version="4.70.0" />
 		
-		<PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.69.1" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0-preview.1.25080.5" />
+		<PackageReference Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.70.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.0-preview.2.25165.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0-preview.2.25163.2" />
 	</ItemGroup>
 
 	<ItemGroup>

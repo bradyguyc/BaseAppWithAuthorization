@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage  
+   x:Class="BaseAppWithAuthorization.Views.MainView"  
+   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+   xmlns:viewmodels="clr-namespace:BaseAppWithAuthorization.ViewModels"  
+   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"   
+        xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+   x:DataType="viewmodels:MainViewViewModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>  
+       <VerticalStackLayout Padding="30,0" Spacing="25">  
+           <Image  
+               Aspect="AspectFit"  
+               HeightRequest="185"  
+               SemanticProperties.Description="dot net bot in a hovercraft number nine"  
+               Source="dotnet_bot.png" />  
+ 
+           <Label  
+               SemanticProperties.HeadingLevel="Level1"  
+               Style="{StaticResource Headline}"  
+               Text="Hello, World!" />  
+ 
+           <Button  
+               x:Name="SignIn"  
+               Command="{Binding SignInCommand}"  
+               IsEnabled="{Binding IsSignedIn, Converter={StaticResource InvertedBoolConverter}}"
+               HorizontalOptions="Fill"  
+               SemanticProperties.Hint="sign in"  
+               Text="Sign In" />  
+ 
+           <Button  
+               x:Name="signOut"  
+               Command="{Binding SignOutCommand}"  
+               HorizontalOptions="Fill"  
+                IsEnabled="{Binding IsSignedIn}"
+               SemanticProperties.Hint="Sign Out"  
+               Text="Sign Out" />
+            <ListView ItemsSource="{Binding IdTokenClaims}" />
+        </VerticalStackLayout>  
+   </ScrollView>  
+ 
+</ContentPage>

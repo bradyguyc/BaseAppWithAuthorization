@@ -2,7 +2,7 @@
 $appSettingsPath = "appsettings.json"
 $msalActivityPath = "Platforms/Android/MsalActivity.cs"
 $androidManifestPath = "Platforms/Android/AndroidManifest.xml"
-$mainActivityPath = "Platforms/Android/MainActivity.cs"
+
 
 # Check if the appsettings.json file exists
 if (-Not (Test-Path -Path $appSettingsPath)) {
@@ -53,19 +53,6 @@ Set-Content -Path $androidManifestPath -Value $updatedAndroidManifestContent
 
 Write-Host "AndroidManifest.xml has been updated with the new android:scheme value: $newDataScheme"
 
-# Check if the MainActivity.cs file exists
-if (-Not (Test-Path -Path $mainActivityPath)) {
-    Write-Host "Error: MainActivity.cs file not found at path: $mainActivityPath"
-    exit 1
-}
 
-# Read the MainActivity.cs file
-$mainActivityContent = Get-Content -Path $mainActivityPath
 
-# Replace the DataScheme value in the MainActivity.cs file
-$updatedMainActivityContent = $mainActivityContent -replace 'DataScheme = "msal[^"]*"', "DataScheme = `"$newDataScheme`""
 
-# Write the updated content back to the MainActivity.cs file
-Set-Content -Path $mainActivityPath -Value $updatedMainActivityContent
-
-Write-Host "MainActivity.cs has been updated with the new DataScheme value: $newDataScheme"
