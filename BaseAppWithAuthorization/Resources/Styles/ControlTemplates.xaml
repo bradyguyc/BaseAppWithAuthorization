@@ -1,0 +1,189 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dx="clr-namespace:DevExpress.Maui.Core;assembly=DevExpress.Maui.Core"
+    xmlns:dxco="clr-namespace:DevExpress.Maui.Controls;assembly=DevExpress.Maui.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+
+
+    <ControlTemplate x:Key="ErrorPopupStandard">
+
+        <dxco:DXPopup
+            x:Name="ErrorPopup"
+            AllowScrim="False"
+            AllowShadow="True"
+            Background="White"
+            BackgroundColor="White"
+            CornerRadius="20"
+            IsOpen="{TemplateBinding ShowErrorPopup,
+                                     Mode=TwoWay}"
+            ShadowColor="Gray"
+            ShadowHorizontalOffset="15"
+            ShadowRadius="10"
+            ShadowVerticalOffset="15">
+            <Grid
+                BackgroundColor="{dx:ThemeColor SurfaceContainerHigh}"
+                HeightRequest="500"
+                RowDefinitions="65,*,60"
+                WidthRequest="300">
+
+
+                <Border
+                    Grid.Row="0"
+                    Margin="6,15,5,5"
+                    BackgroundColor="{TemplateBinding TitleContainerColor}"
+                    Stroke="{dx:ThemeColor Outline}"
+                    StrokeShape="RoundRectangle 30"
+                    StrokeThickness="1">
+                    <Label
+                        Margin="0,4,0,4"
+                        BackgroundColor="{TemplateBinding TitleContainerColor}"
+                        HorizontalOptions="Center"
+                        Text="{TemplateBinding ErrorTitle}"
+                        TextColor="{TemplateBinding TitleOnContainerColor}"
+                        VerticalOptions="Center" />
+                </Border>
+                <!--
+                <Border
+                    Grid.Row="0"
+                    Margin="6,5,5,15"
+                    BackgroundColor="{Binding ShowInfo, Converter={StaticResource BooltoPopupContainerBackColor}}"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{TemplateBinding ShowInfo}"
+                    Stroke="{dx:ThemeColor Outline}"
+                    StrokeShape="RoundRectangle 15"
+                    StrokeThickness="3">
+                    <Label
+                        Margin="0,4,0,4"
+                        BackgroundColor="{Binding ShowInfo, Converter={StaticResource BooltoPopupContainerBackColor}}"
+                        HorizontalOptions="Center"
+                        Text="{TemplateBinding ErrorTitle}"
+                        TextColor="{dx:ThemeColor OnSecondaryContainer}" />
+                </Border>-->
+                <ScrollView Grid.Row="1" Margin="0,0,0,10">
+                    <VerticalStackLayout Margin="6,0,4,10">
+
+                        <Label
+                            Margin="1,0,0,5"
+                            BackgroundColor="{dx:ThemeColor SurfaceContainerHigh}"
+                            HorizontalOptions="Start"
+                            LineBreakMode="WordWrap"
+                            Text="{TemplateBinding ErrorReason}"
+                            TextColor="{TemplateBinding TitleOnContainerColor}" />
+
+                        <toolkit:Expander
+                            x:Name="ErrorDetailExpander"
+                            Margin="5,0,5,20"
+                            IsExpanded="{TemplateBinding ErrorMoreExpanded}">
+                            <toolkit:Expander.Header>
+                                <VerticalStackLayout>
+
+                                    <Label
+                                        Margin="0,0,0,1"
+                                        BackgroundColor="{dx:ThemeColor SurfaceContainerHigh}"
+                                        HorizontalOptions="Start"
+                                        IsVisible="{TemplateBinding ShowWhat}"
+                                        Text="What this means:"
+                                        TextColor="Black" />
+                                    <Label
+                                        Margin="0,0,0,5"
+                                        BackgroundColor="{dx:ThemeColor SurfaceContainerHigh}"
+                                        FontSize="Micro"
+                                        HorizontalOptions="Start"
+                                        IsVisible="{TemplateBinding ShowWhat}"
+                                        LineBreakMode="WordWrap"
+                                        Text="{TemplateBinding WhatThisMeans}"
+                                        TextColor="Black" />
+                                    <Label
+                                        Margin="0,0,0,1"
+                                        BackgroundColor="{dx:ThemeColor SurfaceContainerHigh}"
+                                        HorizontalOptions="Start"
+                                        IsVisible="{TemplateBinding ShowWhat}"
+                                        Text="What you can do:"
+                                        TextColor="Black" />
+                                    <Label
+                                        Margin="0,0,0,5"
+                                        BackgroundColor="{dx:ThemeColor SurfaceContainerHigh}"
+                                        FontSize="Micro"
+                                        HorizontalOptions="Start"
+                                        IsVisible="{TemplateBinding ShowWhat}"
+                                        LineBreakMode="WordWrap"
+                                        Text="{TemplateBinding WhatYouCanDo}"
+                                        TextColor="Black" />
+                                    <HorizontalStackLayout>
+                                        <Label
+                                            Margin="0,0"
+                                            BackgroundColor="{dx:ThemeColor SurfaceContainerHigh}"
+                                            FontAttributes="Bold"
+                                            FontSize="Small"
+                                            Text="More Details"
+                                            TextColor="{dx:ThemeColor OnPrimaryContainer}"
+                                            VerticalOptions="Center" />
+                                        <ImageButton
+                                            Aspect="Center"
+                                            BackgroundColor="{dx:ThemeColor SurfaceContainerHigh}"
+                                            Command="{TemplateBinding ToggleErrorMoreCommand}"
+                                            CornerRadius="20"
+                                            HeightRequest="38"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            WidthRequest="38">
+                                            <ImageButton.Source>
+                                                <FontImageSource
+                                                    x:Name="ErrorExpanderGlyph"
+                                                    FontFamily="MD"
+                                                    Glyph="{TemplateBinding ExpanderIcon}"
+                                                    Size="24"
+                                                    Color="{dx:ThemeColor OnPrimaryContainer}" />
+                                            </ImageButton.Source>
+                                        </ImageButton>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+
+                            </toolkit:Expander.Header>
+                            <VerticalStackLayout>
+                                <Label
+                                    Margin="1,0,0,1"
+                                    BackgroundColor="{dx:ThemeColor SurfaceContainerHigh}"
+                                    HorizontalOptions="Start"
+                                    IsVisible="{TemplateBinding ShowErrorCode}"
+                                    LineBreakMode="WordWrap"
+                                    Text="{TemplateBinding ErrorCode,
+                                                           StringFormat='Error Code: {0}'}"
+                                    TextColor="Black" />
+                                <Label
+                                    Margin="0,0,0,1"
+                                    BackgroundColor="{dx:ThemeColor SurfaceContainerHigh}"
+                                    HorizontalOptions="Start"
+                                    IsVisible="{TemplateBinding ShowErrorMessage}"
+                                    Text="Error Message:"
+                                    TextColor="Black" />
+                                <Label
+                                    BackgroundColor="{dx:ThemeColor SurfaceContainerHigh}"
+                                    FontSize="Micro"
+                                    HorizontalOptions="Start"
+                                    IsVisible="{TemplateBinding ShowErrorMessage}"
+                                    LineBreakMode="WordWrap"
+                                    Text="{TemplateBinding ErrorMessage}"
+                                    TextColor="Black" />
+                            </VerticalStackLayout>
+
+                        </toolkit:Expander>
+
+
+                    </VerticalStackLayout>
+                </ScrollView>
+                <Button
+                    Grid.Row="2"
+                    Margin="10,10,10,10"
+                    Command="{TemplateBinding ClosePopUpCommand}"
+                    Text="Close" />
+            </Grid>
+        </dxco:DXPopup>
+
+
+
+    </ControlTemplate>
+
+
+</ResourceDictionary>
